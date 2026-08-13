@@ -548,7 +548,8 @@ with col_f2:
     ))
     fig_pie.update_layout(**CHART_LAYOUT, height=200,
         title=dict(text="Revenue Mix", font=dict(size=12, color="#94A3B8")),
-        showlegend=False, margin=dict(l=5,r=5,t=30,b=5))
+        showlegend=False)
+    fig_pie.update_layout(margin=dict(l=5,r=5,t=30,b=5))
     st.plotly_chart(fig_pie, use_container_width=True)
 
 with col_f3:
@@ -584,8 +585,8 @@ with col_f3:
         marker=dict(colors=["#10B981","#F59E0B","#EF4444"]),
         textinfo="label+value", textfont=dict(size=10),
     ))
-    fig_rat.update_layout(**CHART_LAYOUT, height=200,
-        margin=dict(l=5,r=5,t=10,b=5), showlegend=False)
+    fig_rat.update_layout(**CHART_LAYOUT, height=200, showlegend=False)
+    fig_rat.update_layout(margin=dict(l=5,r=5,t=10,b=5))
     st.plotly_chart(fig_rat, use_container_width=True)
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -663,7 +664,8 @@ with col_a:
             line=dict(color="#3B82F6", width=1.5),
             fillcolor="rgba(59,130,246,0.1)"
         ))
-        fig5.update_layout(**CHART_LAYOUT, height=160, margin=dict(l=5,r=5,t=5,b=5),
+        fig5.update_layout(**CHART_LAYOUT, height=160)
+        fig5.update_layout(margin=dict(l=5,r=5,t=5,b=5),
             xaxis=dict(showticklabels=False, gridcolor="#1E2D45"),
             yaxis=dict(gridcolor="#1E2D45"))
         st.plotly_chart(fig5, use_container_width=True)
@@ -761,8 +763,8 @@ with col_peer:
         textfont=dict(size=11, color="#94A3B8"),
     ))
     fig_peer.update_layout(**CHART_LAYOUT, height=200,
-        title=dict(text="Day Return vs Peers", font=dict(size=12, color="#94A3B8")),
-        margin=dict(l=5,r=5,t=35,b=5))
+        title=dict(text="Day Return vs Peers", font=dict(size=12, color="#94A3B8")))
+    fig_peer.update_layout(margin=dict(l=5,r=5,t=35,b=5))
     st.plotly_chart(fig_peer, use_container_width=True)
 
     # Key metrics table
@@ -1084,7 +1086,8 @@ with col_i3:
         text=[f"{c}: {s}/100" for c, s in zip(cats_c, risk_scores_c)]
     ))
     fig_radar.update_layout(**CHART_LAYOUT, height=320,
-        title=dict(text="Manager-Level Risk Radar (India)", font=dict(size=13, color="#94A3B8")),
+        title=dict(text="Manager-Level Risk Radar (India)", font=dict(size=13, color="#94A3B8")))
+    fig_radar.update_layout(
         xaxis=dict(visible=False, range=[-130, 130]),
         yaxis=dict(visible=False, range=[-130, 130]),
         margin=dict(l=40, r=40, t=40, b=20))
