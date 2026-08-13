@@ -732,6 +732,430 @@ with col_peer:
           <span style="font-family:'IBM Plex Mono',monospace;color:#F1F5F9;font-weight:600;">{display}</span>
         </div>""", unsafe_allow_html=True)
 
+# ═════════════════════════════════════════════════════════════════════════════
+# SECTION: 6-MONTH PREDICTION + INDIA MANAGER IMPACT
+# ═════════════════════════════════════════════════════════════════════════════
+
+st.markdown("""
+<div style="margin-top:2.5rem;padding:1rem 1.5rem;
+            background:linear-gradient(135deg,#0F1D35 0%,#111827 100%);
+            border:1px solid #1E3A5F;border-radius:12px;">
+  <div style="font-size:0.68rem;color:#3B82F6;font-weight:700;letter-spacing:1.5px;
+              text-transform:uppercase;margin-bottom:4px;">AI-Assisted Intelligence Module</div>
+  <div style="font-size:1.25rem;font-weight:700;color:#F1F5F9;">
+    🔮 6-Month Performance Forecast &nbsp;·&nbsp;
+    🇮🇳 India Manager-Level Impact Radar
+  </div>
+  <div style="font-size:0.78rem;color:#475569;margin-top:4px;">
+    Forecast period: Aug 2026 – Jan 2027 &nbsp;·&nbsp;
+    Based on Q2 2026 results, analyst consensus, NSE:WHIRLPOOL data & restructuring intelligence
+  </div>
+</div>
+""", unsafe_allow_html=True)
+
+# ── ROW: 6-Month WHR (Global) Forecast + India Revenue Forecast ──────────────
+st.markdown('<div class="section-header">Global WHR · 6-Month Forward Outlook</div>', unsafe_allow_html=True)
+
+col_gf1, col_gf2, col_gf3 = st.columns([2, 2, 2])
+
+with col_gf1:
+    # Revenue projection chart Q3-Q4 2026 + Q1-Q2 2027
+    fwd_qtrs   = ["Q2 2026\n(Actual)", "Q3 2026\n(Est.)", "Q4 2026\n(Est.)", "Q1 2027\n(Est.)", "Q2 2027\n(Est.)"]
+    fwd_rev    = [3.52,               3.65,               3.85,               3.45,               3.70]
+    fwd_eps    = [-0.21,              0.55,               1.10,               0.40,               0.80]
+    bar_colors = ["#475569","#3B82F6","#3B82F6","#06B6D4","#06B6D4"]
+
+    fig_fwd = make_subplots(specs=[[{"secondary_y": True}]])
+    fig_fwd.add_trace(go.Bar(
+        x=fwd_qtrs, y=fwd_rev, name="Revenue ($B)",
+        marker_color=bar_colors, opacity=0.8
+    ), secondary_y=False)
+    fig_fwd.add_trace(go.Scatter(
+        x=fwd_qtrs, y=fwd_eps, name="EPS ($)",
+        mode="lines+markers",
+        line=dict(color="#F59E0B", width=2.5),
+        marker=dict(size=9, color=["#EF4444" if e < 0 else "#10B981" for e in fwd_eps])
+    ), secondary_y=True)
+    # Shading for forecast period
+    fig_fwd.add_vrect(x0=0.5, x1=4.5,
+        fillcolor="rgba(59,130,246,0.04)", line_width=0,
+        annotation_text="← Forecast →", annotation_position="top left",
+        annotation_font_size=10, annotation_font_color="#3B82F6")
+    fig_fwd.update_layout(**CHART_LAYOUT, height=300,
+        title=dict(text="WHR Global Revenue & EPS — 6-Month Forecast", font=dict(size=13, color="#94A3B8")))
+    fig_fwd.update_yaxes(title_text="Revenue ($B)", secondary_y=False,
+        gridcolor="#1E2D45", color="#64748B", title_font_size=10)
+    fig_fwd.update_yaxes(title_text="EPS ($)", secondary_y=True,
+        gridcolor="#1E2D45", color="#64748B", title_font_size=10)
+    st.plotly_chart(fig_fwd, use_container_width=True)
+
+with col_gf2:
+    # India NSE:WHIRLPOOL Revenue forecast (INR Crore)
+    india_qtrs = ["Q4 FY26\n(Actual)", "Q1 FY27\n(Est.)", "Q2 FY27\n(Est.)", "Q3 FY27\n(Est.)"]
+    india_rev  = [2181,               2050,               2350,               2500]
+    india_ebitda=[131,                102,                165,                185]
+    india_colors=["#475569","#10B981","#10B981","#10B981"]
+
+    fig_ind = make_subplots(specs=[[{"secondary_y": True}]])
+    fig_ind.add_trace(go.Bar(
+        x=india_qtrs, y=india_rev, name="Revenue (₹ Cr)",
+        marker_color=india_colors, opacity=0.8
+    ), secondary_y=False)
+    fig_ind.add_trace(go.Scatter(
+        x=india_qtrs, y=india_ebitda, name="EBITDA (₹ Cr)",
+        mode="lines+markers",
+        line=dict(color="#F59E0B", width=2.5),
+        marker=dict(size=9, color="#F59E0B")
+    ), secondary_y=True)
+    fig_ind.update_layout(**CHART_LAYOUT, height=300,
+        title=dict(text="Whirlpool India (NSE) — Revenue & EBITDA Forecast", font=dict(size=13, color="#94A3B8")))
+    fig_ind.update_yaxes(title_text="Revenue (₹ Cr)", secondary_y=False,
+        gridcolor="#1E2D45", color="#64748B", title_font_size=10)
+    fig_ind.update_yaxes(title_text="EBITDA (₹ Cr)", secondary_y=True,
+        gridcolor="#1E2D45", color="#64748B", title_font_size=10)
+    st.plotly_chart(fig_ind, use_container_width=True)
+
+with col_gf3:
+    st.markdown("**6-Month Key Forecast Signals**")
+    signals = [
+        ("WHR Global Q3 2026",  "Revenue $3.65B est.",   "+3.7% QoQ recovery",   "#3B82F6",  "Seasonal uplift + promo price increase"),
+        ("WHR EPS Recovery",    "Q3 EPS ~$0.55",         "From -$0.21 in Q2",    "#10B981",  "Cost takeout + lower promo spend"),
+        ("India Q1 FY27 Rev",   "₹2,050 Cr est.",        "-6.0% QoQ seasonal",   "#F59E0B",  "Q1 is weak quarter — AC demand tails off"),
+        ("India FY27 Full Year","₹9,030 Cr consensus",   "+8.2% YoY growth",     "#10B981",  "11 analyst consensus — Trendlyne data"),
+        ("India EPS FY27",      "₹25.29 est.",           "+28% YoY (revised ↓)", "#F59E0B",  "Down from ₹29.87 after Q1 miss"),
+        ("Stake Sale (31%)",    "EQT / Bain / Reliance",  "Due diligence active", "#8B5CF6",  "$550–600M deal — changes India ownership"),
+        ("Global Net Debt",     "Target <$5.0B",         "On track by Dec 2026", "#06B6D4",  "Asset sales + Mexico CapEx generating cash"),
+        ("WHR Stock Analyst",   "Mean target $42",        "BofA Underperform $36","#EF4444",  "Caution: consensus skewed bearish"),
+    ]
+    for s in signals:
+        label, val, delta, col, note = s
+        st.markdown(f"""
+        <div style="display:flex;gap:8px;align-items:flex-start;
+                    padding:5px 0;border-bottom:1px solid #1E2D45;">
+          <div style="width:5px;border-radius:3px;background:{col};
+                      min-height:40px;flex-shrink:0;"></div>
+          <div style="flex:1;">
+            <div style="font-size:0.7rem;color:#64748B;text-transform:uppercase;
+                        letter-spacing:0.6px;">{label}</div>
+            <div style="font-size:0.9rem;font-weight:700;color:#F1F5F9;
+                        font-family:'IBM Plex Mono',monospace;">{val}</div>
+            <div style="font-size:0.72rem;color:{col};font-weight:600;">{delta}</div>
+            <div style="font-size:0.68rem;color:#475569;">{note}</div>
+          </div>
+        </div>""", unsafe_allow_html=True)
+
+# ── INDIA MANAGER IMPACT SECTION ─────────────────────────────────────────────
+st.markdown('<div class="section-header">🇮🇳 India Manager-Level Impact Radar — Aug 2026 to Jan 2027</div>',
+            unsafe_allow_html=True)
+
+# Context banner
+st.markdown("""
+<div style="background:#111827;border:1px solid #1E3A5F;border-radius:8px;
+            padding:0.9rem 1.2rem;margin-bottom:1rem;">
+  <div style="display:flex;gap:2rem;flex-wrap:wrap;">
+    <div><div style="font-size:0.68rem;color:#64748B;text-transform:uppercase;">India Employees (2024)</div>
+         <div style="font-size:1.1rem;font-weight:700;color:#F1F5F9;font-family:'IBM Plex Mono',monospace;">~1,536</div></div>
+    <div><div style="font-size:0.68rem;color:#64748B;text-transform:uppercase;">India Hubs</div>
+         <div style="font-size:1.1rem;font-weight:700;color:#F1F5F9;font-family:'IBM Plex Mono',monospace;">Pune · Ranjangaon · Faridabad</div></div>
+    <div><div style="font-size:0.68rem;color:#64748B;text-transform:uppercase;">India FY26 Revenue</div>
+         <div style="font-size:1.1rem;font-weight:700;color:#F1F5F9;font-family:'IBM Plex Mono',monospace;">₹8,034 Cr (+1.4% YoY)</div></div>
+    <div><div style="font-size:0.68rem;color:#64748B;text-transform:uppercase;">India EBITDA FY26</div>
+         <div style="font-size:1.1rem;font-weight:700;color:#F1F5F9;font-family:'IBM Plex Mono',monospace;">₹481 Cr (6.0% margin)</div></div>
+    <div><div style="font-size:0.68rem;color:#64748B;text-transform:uppercase;">Stake Sale Status</div>
+         <div style="font-size:1.1rem;font-weight:700;color:#8B5CF6;font-family:'IBM Plex Mono',monospace;">Due Diligence Active</div></div>
+  </div>
+</div>
+""", unsafe_allow_html=True)
+
+col_i1, col_i2, col_i3 = st.columns([2, 2, 2])
+
+with col_i1:
+    st.markdown("**Department-Level Risk Heat Map**")
+
+    dept_data = {
+        "Department":   ["Finance / FP&A", "Commercial Finance", "Sales (Regional)", "IT / Engineering", "Supply Chain", "HR / People Ops", "Marketing", "Manufacturing (Ranjangaon)"],
+        "Risk Level":   ["Medium",          "High",               "Low",              "Low",              "Medium",       "High",             "Medium",    "Low"],
+        "Risk Score":   [55,                80,                   25,                 20,                 50,             75,                 45,          30],
+        "Headcount Δ":  ["Stable",          "Role exits likely",  "Hiring active",    "GCC expanding",    "Reorganising", "Centralising",     "Watch",     "Stable"],
+    }
+    df_risk = pd.DataFrame(dept_data)
+
+    color_map_r = {"High": "#EF4444", "Medium": "#F59E0B", "Low": "#10B981"}
+    for _, row in df_risk.iterrows():
+        col_r = color_map_r.get(row["Risk Level"], "#64748B")
+        bar_w = int(row["Risk Score"] * 1.5)
+        st.markdown(f"""
+        <div style="padding:6px 0;border-bottom:1px solid #1E2D45;">
+          <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+            <span style="font-size:0.8rem;color:#CBD5E1;font-weight:500;">{row['Department']}</span>
+            <span style="font-size:0.72rem;color:{col_r};font-weight:700;">{row['Risk Level']}</span>
+          </div>
+          <div style="background:#1E2D45;border-radius:4px;height:5px;margin-bottom:2px;">
+            <div style="background:{col_r};width:{bar_w}px;max-width:100%;height:5px;
+                        border-radius:4px;"></div>
+          </div>
+          <div style="font-size:0.68rem;color:#475569;">{row['Headcount Δ']}</div>
+        </div>""", unsafe_allow_html=True)
+
+with col_i2:
+    st.markdown("**Manager-Level Impact by Function — Next 6 Months**")
+
+    impacts = [
+        {
+            "role":    "Finance Managers (FP&A)",
+            "risk":    "MEDIUM",
+            "rcol":    "#F59E0B",
+            "events":  [
+                "Abhish Jain appointed Head FP&A (27 Jul 2026)",
+                "Charu Aggarwal moved to Commercial Finance",
+                "Forecasting automation being implemented",
+                "Manager roles: stable but KPIs tightening",
+            ],
+            "outlook": "Stable through Q3; automation may compress mid-level FP&A headcount by Q1 2027",
+        },
+        {
+            "role":    "Commercial Finance Managers",
+            "risk":    "HIGH",
+            "rcol":    "#EF4444",
+            "events":  [
+                "Bharat Gulati (Head) resigned — 14 Jul 2026",
+                "Successor not yet named — vacuum at top",
+                "Reporting restructure likely in progress",
+                "Manager KPIs tied to margin recovery targets",
+            ],
+            "outlook": "High uncertainty — reorganisation of function expected Aug–Oct 2026",
+        },
+        {
+            "role":    "Sales / Regional Managers",
+            "risk":    "LOW",
+            "rcol":    "#10B981",
+            "events":  [
+                "Jijesh Gopalan moved to VP-Service (15 Jul)",
+                "Sr. Executive roles being actively hired",
+                "Openings in Pune, Mumbai, Ahmedabad, Faridabad, Gurgaon, Pondicherry",
+                "Premium product launch expanding footprint",
+            ],
+            "outlook": "Growth mode — manager hiring active; record March 2026 shipments set positive tone",
+        },
+        {
+            "role":    "IT / GCC / Engineering Managers",
+            "risk":    "LOW",
+            "rcol":    "#10B981",
+            "events":  [
+                "India named as key hub (Finance, Procurement, IT, HR)",
+                "GTEC Pune expanding — R&D and product engineering",
+                "Business Services Org. being built with India as centre",
+                "Decentralised model → more autonomy for India leads",
+            ],
+            "outlook": "Best-positioned function — GCC expansion favours India managers through 2027",
+        },
+        {
+            "role":    "HR / People Ops Managers",
+            "risk":    "HIGH",
+            "rcol":    "#EF4444",
+            "events":  [
+                "Global workforce: 1,700+ cut globally in 2024–25",
+                "India BSO centralising HR processes across BUs",
+                "Cost takeout = fewer HR BPs per BU",
+                "Manager-to-IC ratio under review",
+            ],
+            "outlook": "Centralisation risk — shared services absorb HR roles; managerial layer may slim by Q4 2026",
+        },
+    ]
+
+    for imp in impacts:
+        st.markdown(f"""
+        <div style="background:#111827;border:1px solid #1E2D45;border-radius:8px;
+                    padding:0.7rem 0.9rem;margin-bottom:0.6rem;
+                    border-left:3px solid {imp['rcol']};">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;">
+            <div style="font-size:0.82rem;font-weight:700;color:#F1F5F9;">{imp['role']}</div>
+            <div style="font-size:0.68rem;font-weight:700;color:{imp['rcol']};
+                        background:rgba(0,0,0,0.3);padding:2px 8px;border-radius:10px;">
+              {imp['risk']} RISK</div>
+          </div>
+          {"".join(f'<div style="font-size:0.7rem;color:#64748B;padding:1px 0;">• {e}</div>' for e in imp['events'])}
+          <div style="font-size:0.72rem;color:{imp['rcol']};margin-top:5px;font-style:italic;">
+            📍 {imp['outlook']}</div>
+        </div>""", unsafe_allow_html=True)
+
+with col_i3:
+    # Radar chart - manager function risk
+    categories   = ["Finance\nFP&A", "Commercial\nFinance", "Sales\nRegional", "IT /\nGCC", "Supply\nChain", "HR /\nPeople Ops"]
+    risk_scores  = [55, 80, 25, 20, 50, 75]
+    risk_scores_c= risk_scores + [risk_scores[0]]
+    cats_c       = categories + [categories[0]]
+
+    import math
+    n = len(categories)
+    angles = [i * 2 * math.pi / n for i in range(n)] + [0]
+    xs = [r * math.cos(a - math.pi/2) for r, a in zip(risk_scores_c, angles)]
+    ys = [r * math.sin(a - math.pi/2) for r, a in zip(risk_scores_c, angles)]
+
+    fig_radar = go.Figure()
+    # Rings
+    for ring in [25, 50, 75, 100]:
+        rxs = [ring*math.cos(a-math.pi/2) for a in angles]
+        rys = [ring*math.sin(a-math.pi/2) for a in angles]
+        fig_radar.add_trace(go.Scatter(x=rxs, y=rys, mode="lines",
+            line=dict(color="#1E2D45", width=1), showlegend=False, hoverinfo="skip"))
+    # Axes
+    for i, (cat, ang) in enumerate(zip(categories, angles[:-1])):
+        fig_radar.add_trace(go.Scatter(
+            x=[0, 100*math.cos(ang-math.pi/2)],
+            y=[0, 100*math.sin(ang-math.pi/2)],
+            mode="lines", line=dict(color="#1E2D45", width=1),
+            showlegend=False, hoverinfo="skip"))
+        fig_radar.add_annotation(
+            x=115*math.cos(ang-math.pi/2),
+            y=115*math.sin(ang-math.pi/2),
+            text=cat, showarrow=False,
+            font=dict(size=10, color="#94A3B8"), align="center")
+    # Fill
+    fig_radar.add_trace(go.Scatter(
+        x=xs, y=ys, mode="lines+markers", fill="toself",
+        fillcolor="rgba(239,68,68,0.15)",
+        line=dict(color="#EF4444", width=2),
+        marker=dict(size=8, color="#EF4444"),
+        name="Risk Score",
+        hovertemplate="<b>%{text}</b><extra></extra>",
+        text=[f"{c}: {s}/100" for c, s in zip(cats_c, risk_scores_c)]
+    ))
+    fig_radar.update_layout(**CHART_LAYOUT, height=320,
+        title=dict(text="Manager-Level Risk Radar (India)", font=dict(size=13, color="#94A3B8")),
+        xaxis=dict(visible=False, range=[-130, 130]),
+        yaxis=dict(visible=False, range=[-130, 130]),
+        margin=dict(l=40, r=40, t=40, b=20))
+    st.plotly_chart(fig_radar, use_container_width=True)
+
+    # Stake sale impact box
+    st.markdown("""
+    <div style="background:#1A0F2E;border:1px solid #5B21B6;border-radius:8px;
+                padding:0.9rem 1rem;margin-top:0.5rem;">
+      <div style="font-size:0.72rem;font-weight:700;color:#8B5CF6;text-transform:uppercase;
+                  letter-spacing:0.8px;margin-bottom:6px;">🔔 Critical Watch: 31% Stake Sale</div>
+      <div style="font-size:0.78rem;color:#CBD5E1;line-height:1.5;">
+        WHR Corp selling 31% of Whirlpool India to Reliance Retail, EQT, Bain or TPG.
+        Due diligence active. Deal expected <strong style="color:#F59E0B;">~$550–600M</strong>.
+      </div>
+      <div style="margin-top:8px;">
+        <div style="font-size:0.7rem;color:#8B5CF6;font-weight:600;margin-bottom:4px;">Manager Impact if deal closes:</div>
+        <div style="font-size:0.7rem;color:#94A3B8;">• New strategic owner → leadership reshuffle likely</div>
+        <div style="font-size:0.7rem;color:#94A3B8;">• Greater India autonomy = more Manager-level P&L ownership</div>
+        <div style="font-size:0.7rem;color:#94A3B8;">• PE buyer (EQT/Bain) → cost reduction playbook</div>
+        <div style="font-size:0.7rem;color:#94A3B8;">• Reliance buyer → integration, possible headcount growth</div>
+        <div style="font-size:0.7rem;color:#F59E0B;margin-top:4px;">⚡ Highest-impact event for India managers in 6 months</div>
+      </div>
+    </div>""", unsafe_allow_html=True)
+
+# ── Timeline ─────────────────────────────────────────────────────────────────
+st.markdown('<div class="section-header">🗓 India Manager Event Timeline — Aug 2026 → Jan 2027</div>',
+            unsafe_allow_html=True)
+
+timeline_events = [
+    ("Aug 2026",  "#3B82F6",  "BSO India Hub Formalised",           "Finance, Procurement, IT, HR shared services consolidate under India leadership"),
+    ("Aug 2026",  "#EF4444",  "Commercial Finance Head Search",      "Bharat Gulati gap — successor appointment expected; interim pressure on Finance managers"),
+    ("Sep 2026",  "#8B5CF6",  "Stake Sale Milestone",               "Shortlisted buyers (EQT, Bain, Reliance, TPG) submit binding bids ~$550–600M"),
+    ("Oct 2026",  "#F59E0B",  "Q2 FY27 Results (India)",            "Revenue est. ₹2,350 Cr — festive season demand; EBITDA recovery watch"),
+    ("Oct 2026",  "#06B6D4",  "GTEC Pune Capability Expansion",      "New engineering projects assigned — manager headcount additions in R&D"),
+    ("Nov 2026",  "#10B981",  "WHR Global Q3 2026 Earnings",         "EPS recovery to ~$0.55 — positive signal for India subsidiary confidence"),
+    ("Nov 2026",  "#F59E0B",  "FY27 Annual Planning Cycle",          "India managers present FY27 budgets; margin recovery targets set for each BU"),
+    ("Dec 2026",  "#8B5CF6",  "Stake Sale Expected Close",           "New ownership takes effect — new board composition; MD/CEO continuity TBD"),
+    ("Jan 2027",  "#EF4444",  "WHR Global Q4 2026 Earnings",         "EPS est. ~$1.10 — critical for India subsidiary's cost allocation & headcount freeze lift"),
+    ("Jan 2027",  "#10B981",  "FY27 HR Headcount Review",            "India manager org design locked for FY27; promotions & PIP decisions expected"),
+]
+
+# Display as horizontal-ish timeline
+cols_tl = st.columns(5)
+for i, (month, col_tl, title_tl, desc_tl) in enumerate(timeline_events):
+    with cols_tl[i % 5]:
+        st.markdown(f"""
+        <div style="background:#0F1629;border:1px solid #1E2D45;border-radius:8px;
+                    padding:0.65rem 0.75rem;margin-bottom:0.6rem;
+                    border-top:3px solid {col_tl};">
+          <div style="font-size:0.65rem;font-weight:700;color:{col_tl};
+                      text-transform:uppercase;letter-spacing:0.8px;">{month}</div>
+          <div style="font-size:0.78rem;font-weight:700;color:#F1F5F9;
+                      margin:4px 0 3px;">{title_tl}</div>
+          <div style="font-size:0.68rem;color:#475569;line-height:1.4;">{desc_tl}</div>
+        </div>""", unsafe_allow_html=True)
+
+# ── Action guide for managers ─────────────────────────────────────────────────
+st.markdown('<div class="section-header">💡 Recommended Actions for India Managers — By Function</div>',
+            unsafe_allow_html=True)
+
+col_a1, col_a2, col_a3, col_a4 = st.columns(4)
+
+actions = [
+    {
+        "title": "Finance / FP&A",
+        "icon": "📊",
+        "color": "#3B82F6",
+        "do": [
+            "Own forecasting automation tools proactively",
+            "Upskill in predictive modelling (Power BI / Python)",
+            "Align KPIs to CFO Aditya Jain's cash-flow agenda",
+            "Position as key player in stake sale due diligence",
+        ],
+        "watch": "Role redundancy if BSO centralises FP&A to Benton Harbor or Mexico",
+    },
+    {
+        "title": "Sales / Commercial",
+        "icon": "📦",
+        "color": "#10B981",
+        "do": [
+            "Capitalise on premium product relaunch (30%+ lineup refresh)",
+            "Drive festive season Q3 FY27 — September–November",
+            "Expand e-commerce channel ownership",
+            "Build market share in AC category (capital-intensive growth)",
+        ],
+        "watch": "Aggressive competitive pricing from LG, Samsung — margin pressure continues",
+    },
+    {
+        "title": "IT / GCC / Engineering",
+        "icon": "💻",
+        "color": "#8B5CF6",
+        "do": [
+            "Lead BSO India hub digital transformation projects",
+            "Claim ownership of GTEC Pune R&D tracks",
+            "Build AI / automation proof-of-concepts for global BUs",
+            "Network with new ownership (PE or Reliance) tech agenda",
+        ],
+        "watch": "Global product engineering decentralisation — opportunity if you lead, risk if you lag",
+    },
+    {
+        "title": "HR / People Ops",
+        "icon": "👥",
+        "color": "#F59E0B",
+        "do": [
+            "Lead India-BSO HR centre of excellence build",
+            "Build change management capability for stake sale transition",
+            "Digitise HR processes before centralisation mandate",
+            "Retain key talent ahead of ownership uncertainty",
+        ],
+        "watch": "Shared services absorption likely eliminates HR BP roles at BU level",
+    },
+]
+
+for col_act, act in zip([col_a1, col_a2, col_a3, col_a4], actions):
+    with col_act:
+        dos = "".join(f'<div style="font-size:0.7rem;color:#94A3B8;padding:2px 0;">✅ {d}</div>' for d in act["do"])
+        st.markdown(f"""
+        <div style="background:#0F1629;border:1px solid #1E2D45;border-radius:10px;
+                    padding:0.9rem;border-top:3px solid {act['color']};height:100%;">
+          <div style="font-size:1rem;margin-bottom:4px;">{act['icon']}</div>
+          <div style="font-size:0.85rem;font-weight:700;color:#F1F5F9;margin-bottom:8px;">{act['title']}</div>
+          <div style="font-size:0.68rem;color:{act['color']};font-weight:600;text-transform:uppercase;
+                      letter-spacing:0.6px;margin-bottom:5px;">Actions to Take Now</div>
+          {dos}
+          <div style="margin-top:8px;padding:5px 7px;background:#1E0A0A;border-radius:5px;">
+            <div style="font-size:0.65rem;color:#EF4444;font-weight:600;">⚠ Watch Out For</div>
+            <div style="font-size:0.68rem;color:#7F1D1D;">{act['watch']}</div>
+          </div>
+        </div>""", unsafe_allow_html=True)
+
+st.markdown("<br>", unsafe_allow_html=True)
+
 # ─────────────────────────────────────────────────────────────────────────────
 # FOOTER
 # ─────────────────────────────────────────────────────────────────────────────
