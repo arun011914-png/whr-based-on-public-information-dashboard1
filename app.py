@@ -454,8 +454,9 @@ with col_fin:
         marker=dict(size=8, color=["#10B981" if e >= 0 else "#EF4444" for e in eps_vals])),
         secondary_y=True)
     fig3.update_layout(**CHART_LAYOUT, height=175,
-        title=dict(text="Quarterly Revenue & EPS", font=dict(size=13, color="#94A3B8")),
-        legend=dict(orientation="h", yanchor="bottom", y=1.0, xanchor="right", x=1))
+        title=dict(text="Quarterly Revenue & EPS", font=dict(size=13, color="#94A3B8")))
+    fig3.update_layout(legend=dict(orientation="h", yanchor="bottom", y=1.0, xanchor="right", x=1,
+                                    bgcolor="rgba(0,0,0,0)", borderwidth=0))
     fig3.update_yaxes(title_text="Revenue ($B)", secondary_y=False,
                       gridcolor="#1E2D45", color="#64748B", title_font_size=10)
     fig3.update_yaxes(title_text="EPS ($)", secondary_y=True,
